@@ -1,5 +1,6 @@
 package com.example.kotlinmessager
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -23,6 +24,10 @@ class MainActivity : AppCompatActivity() {
 
         ja_tem_conta_textView.setOnClickListener {
             Log.d("MainActivity", "Tente ver a tela de login")
+
+            //launch the login activity
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
         } //texto click
 
     } //onCreate

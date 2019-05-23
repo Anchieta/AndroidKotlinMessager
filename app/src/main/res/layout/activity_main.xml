@@ -50,7 +50,7 @@
             app:layout_constraintEnd_toEndOf="@+id/senha_editText"
             app:layout_constraintStart_toStartOf="@+id/senha_editText"/>
     <TextView
-            android:text="Já tem uma conta?]"
+            android:text="Já tem uma conta?"
             android:textColor="@android:color/white"
             android:textStyle="bold"
             android:textSize="16sp"
