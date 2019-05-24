@@ -33,6 +33,9 @@ dependencies {
 
     //FireBase configuração para
     implementation 'com.google.firebase:firebase-core:16.0.9'
+
+    //Origem: https://firebase.google.com/docs/auth/android/password-auth
+    implementation 'com.google.firebase:firebase-auth:16.1.0'
 }
 //FireBase configuração para
 apply plugin: 'com.google.gms.google-services'
