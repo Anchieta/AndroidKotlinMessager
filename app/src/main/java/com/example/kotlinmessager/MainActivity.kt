@@ -20,37 +20,29 @@ class MainActivity : AppCompatActivity() {
             val email = email_editText.text.toString()
             val senha = senha_editText.text.toString()
 
-            if (email.isEmpty() || senha.isEmpty()) return@setOnClickListener
+            if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
+                Toast.makeText(baseContext, "Por favor, verifique se os campos: \'Nome\', \'Email\' e \'Senha\'", Toast.LENGTH_SHORT).show()
 
-            Log.d( "MainActivity", "Nome: $nome")
-            Log.d("MainActivity", "Email: " + email)
-            Log.d( "MainActivity",  "Senha: $senha")
+                return@setOnClickListener
+            }
 
-            Toast.makeText(baseContext, "Nome: $nome \n\nEmail: $email \n\nSenha: $senha",
-                Toast.LENGTH_SHORT).show()
+            Toast.makeText(baseContext, "Nome: $nome \n\nEmail: $email \n\nSenha: $senha", Toast.LENGTH_SHORT).show()
 
             //Autenticando no Firebase
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, senha).addOnCompleteListener {
-                if (!it.isSuccessful) {
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, senha)
+                .addOnCompleteListener {
+                    if (!it.isSuccessful) {
+                        Toast.makeText(baseContext, "Registro ${it.result?.user?.uid} gravado com sucesso!", Toast.LENGTH_SHORT).show()
 
-                    return@addOnCompleteListener
-                }
-                //else - Se for sucesso
-                Toast.makeText(baseContext, "Usuário criado com sucesso!\\n\\nuid: ${it.result?.user?.uid}",
-                    Toast.LENGTH_SHORT).show()
-                Log.d("Main", "Usuário criado com sucesso!\n\nuid: ${it.result?.user?.uid}")
-            }
+                        return@addOnCompleteListener
+                    } //if (!it.isSuccessful)
+                } //.addOnCompleteListener
+                .addOnFailureListener {
+                    Toast.makeText(baseContext, "Falha ao tentar criar o usuário. Erro: ${it.message}", Toast.LENGTH_SHORT).show()
+                } //.addOnFailureListener
+            } //FirebaseAuth.getInstance()
         } //btn
-
-        ja_tem_conta_textView.setOnClickListener {
-            Log.d("MainActivity", "Tente ver a tela de login")
-
-            //launch the login activity
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-        } //texto click
-
     } //onCreate
+
+
 } //class
