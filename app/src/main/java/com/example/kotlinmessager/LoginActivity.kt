@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity: AppCompatActivity() {
@@ -18,7 +20,13 @@ class LoginActivity: AppCompatActivity() {
             val email = email_editText.text.toString()
             val senha = senha_editText.text.toString()
 
-            Log.d("Login", "Email: $email e Senha: $senha")
+            Toast.makeText(baseContext, "Email: $email\n\nSenha: $senha", Toast.LENGTH_LONG).show()
+
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, senha)
+                .addOnCompleteListener {
+
+                }
+
         } //login
 
         voltar_textView.setOnClickListener {

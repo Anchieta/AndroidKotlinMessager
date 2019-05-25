@@ -15,7 +15,8 @@
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="32dp"
             android:layout_marginStart="32dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="32dp"
-            android:hint="@android:string/defaultVoiceMailAlphaTag" android:background="@android:color/white"/>
+            android:hint="@android:string/defaultVoiceMailAlphaTag"
+            android:background="@drawable/rounded_edittext_register_login"/>
     <EditText
             android:layout_width="0dp"
             android:layout_height="50dp"
@@ -24,14 +25,19 @@
             android:id="@+id/senha_editText"
             app:layout_constraintTop_toBottomOf="@+id/email_editText" app:layout_constraintEnd_toEndOf="@+id/email_editText"
             app:layout_constraintStart_toStartOf="@+id/email_editText" android:layout_marginTop="8dp"
-            android:hint="Senha" android:background="@android:color/white"/>
+            android:hint="Senha"
+            android:background="@drawable/rounded_edittext_register_login"/>
     <Button
             android:text="Fazer Login"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/login_button"
-            app:layout_constraintTop_toBottomOf="@+id/senha_editText" app:layout_constraintEnd_toEndOf="@+id/senha_editText"
-            app:layout_constraintStart_toStartOf="@+id/senha_editText" android:layout_marginTop="64dp"
+            android:background="@drawable/rounded_button"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/senha_editText"
+            app:layout_constraintEnd_toEndOf="@+id/senha_editText"
+            app:layout_constraintStart_toStartOf="@+id/senha_editText" android:layout_marginTop="25dp"
             app:layout_constraintHorizontal_bias="0.54"/>
     <TextView
             android:text="Voltar"
