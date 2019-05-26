@@ -31,11 +31,16 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    //FireBase configuração para
-    implementation 'com.google.firebase:firebase-core:16.0.9'
 
-    //Origem: https://firebase.google.com/docs/auth/android/password-auth
+    //FireBase configuração
+    //Geral
+    implementation 'com.google.firebase:firebase-core:16.0.9'
+    //Auth - Origem: https://firebase.google.com/docs/auth/android/password-auth
     implementation 'com.google.firebase:firebase-auth:16.1.0'
+    //Storage - https://firebase.google.com/docs/storage/android/start
+    implementation 'com.google.firebase:firebase-storage:16.1.0'
+    //Database - https://firebase.google.com/docs/database/android/start?hl=pt-br
+    implementation 'com.google.firebase:firebase-database:16.1.0'
 }
 //FireBase configuração para
 apply plugin: 'com.google.gms.google-services'

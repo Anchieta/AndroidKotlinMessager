@@ -1,8 +1,12 @@
 package com.example.kotlinmessager
 
+import android.app.Activity
 import android.content.Intent
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import android.widget.Toast.makeText
@@ -30,11 +34,32 @@ class MainActivity : AppCompatActivity() {
 
         selectphoto_button.setOnClickListener {
 
-            Toast.makeText(this, "Tentando carregar photo", Toast.LENGTH_LONG).show()
-           // Log.d("MainAtivicty", "Tentando mostrar photo")
-        }
+           // Toast.makeText(this, "Tentando carregar photo", Toast.LENGTH_LONG).show()
+
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, 0)
+
+        } //selectphoto
 
     } //onCreate
+
+    val selectedPhotoUri: Uri? = null
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
+            Toast.makeText(this, "Foto selecionada", Toast.LENGTH_LONG).show()
+
+            val selectedPhotoUri = data.data
+            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
+
+            val bitmapDrawable = BitmapDrawable(bitmap)
+            selectphoto_button.setBackgroundDrawable(bitmapDrawable)
+
+        } //if
+    }
 
     private fun performRegister() {
 
@@ -58,12 +83,18 @@ class MainActivity : AppCompatActivity() {
                 }
                 //Else
                 Toast.makeText(baseContext, "Registro gravado com sucesso!!!", Toast.LENGTH_LONG).show()
+
+                //uploadImageToFirebaseStorage()
             } //.addOnCompleteListener
             .addOnFailureListener {
                 Toast.makeText(baseContext, "Falha ao tentar criar o usuário. Erro: ${it.message}", Toast.LENGTH_LONG).show()
             } //.addOnFailureListener
     }//performRegister
+/*
+    private fun uploadImageToFirebaseStorage() {
 
+    }
+*/
 
 } //class
 
