@@ -12,6 +12,8 @@ import android.widget.Toast
 import android.widget.Toast.makeText
 import kotlinx.android.synthetic.main.activity_main.*
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.storage.FirebaseStorage
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -72,7 +74,7 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        Toast.makeText(baseContext, "Nome: $nome \n\nEmail: $email \n\nSenha: $senha", Toast.LENGTH_LONG).show()
+        //Toast.makeText(baseContext, "Nome: $nome \n\nEmail: $email \n\nSenha: $senha", Toast.LENGTH_LONG).show()
 
         //Autenticando no Firebase
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, senha)
@@ -83,18 +85,27 @@ class MainActivity : AppCompatActivity() {
                 }
                 //Else
                 Toast.makeText(baseContext, "Registro gravado com sucesso!!!", Toast.LENGTH_LONG).show()
-
-                //uploadImageToFirebaseStorage()
+                uploadImageToFirebaseStorage()
             } //.addOnCompleteListener
             .addOnFailureListener {
                 Toast.makeText(baseContext, "Falha ao tentar criar o usuário. Erro: ${it.message}", Toast.LENGTH_LONG).show()
             } //.addOnFailureListener
     }//performRegister
-/*
-    private fun uploadImageToFirebaseStorage() {
 
-    }
-*/
+    private fun uploadImageToFirebaseStorage() {
+        if (selectedPhotoUri == null) return
+
+        val fileName = UUID.randomUUID().toString()
+        val ref = FirebaseStorage.getInstance().getReference("kotlinmessager/images/$fileName")
+
+        ref.putFile(selectedPhotoUri!!)
+            .addOnSuccessListener {
+                Toast.makeText(baseContext, "Imagem: ${it.metadata?.path} uploaded com sucesso!", Toast.LENGTH_LONG).show()
+                Log.d("MainActivity", "Imagem: ${it.metadata?.path} uploaded com sucesso!")
+            }
+
+    } // uploadImageToFirebaseStorage()
+
 
 } //class
 
